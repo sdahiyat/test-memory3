@@ -1,0 +1,196 @@
+{
+  "schemaVersion": "cofabric.memory.roadmap.v1",
+  "featuresNotYetImplemented": [
+    {
+      "name": "Journal entries",
+      "description": "Create, edit, and delete journal entries",
+      "needs": [
+        "pages",
+        "API routes",
+        "DB tables"
+      ]
+    },
+    {
+      "name": "Mood logging",
+      "description": "Daily mood tracking functionality",
+      "needs": [
+        "pages",
+        "API routes",
+        "DB tables"
+      ]
+    },
+    {
+      "name": "Timeline view",
+      "description": "View entries and moods in chronological order",
+      "needs": [
+        "pages",
+        "API routes"
+      ]
+    },
+    {
+      "name": "AI insights",
+      "description": "Generate AI-powered reflections for paid users",
+      "needs": [
+        "API routes"
+      ]
+    },
+    {
+      "name": "Search functionality",
+      "description": "Search through entries and tags",
+      "needs": [
+        "pages",
+        "API routes"
+      ]
+    },
+    {
+      "name": "Authentication system",
+      "description": "User registration and login",
+      "needs": [
+        "pages",
+        "API routes"
+      ]
+    },
+    {
+      "name": "User limits enforcement",
+      "description": "Enforce 5 entries/day and 3 mood logs/day limits",
+      "needs": [
+        "API routes"
+      ]
+    },
+    {
+      "name": "Stripe payment integration",
+      "description": "Payment system for AI features",
+      "needs": [
+        "pages",
+        "API routes"
+      ]
+    }
+  ],
+  "databaseTablesToCreate": [
+    {
+      "name": "User",
+      "columnsSpecifiedInSpec": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notes": null
+        },
+        {
+          "name": "email",
+          "type": "text",
+          "notes": null
+        }
+      ],
+      "schemaDetailsInSpec": false
+    },
+    {
+      "name": "Entry",
+      "columnsSpecifiedInSpec": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notes": null
+        },
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "notes": "Foreign key to User"
+        },
+        {
+          "name": "content",
+          "type": "text",
+          "notes": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "notes": null
+        }
+      ],
+      "schemaDetailsInSpec": true
+    },
+    {
+      "name": "MoodLog",
+      "columnsSpecifiedInSpec": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "notes": null
+        },
+        {
+          "name": "user_id",
+          "type": "uuid",
+          "notes": "Foreign key to User"
+        },
+        {
+          "name": "mood",
+          "type": null,
+          "notes": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp",
+          "notes": null
+        }
+      ],
+      "schemaDetailsInSpec": false
+    }
+  ],
+  "apiEndpointsToBuild": [
+    {
+      "method": "POST",
+      "path": "/api/entries",
+      "description": "Create a new journal entry",
+      "authRequired": true
+    },
+    {
+      "method": "PUT",
+      "path": "/api/entries",
+      "description": "Update an existing journal entry",
+      "authRequired": true
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/entries",
+      "description": "Delete a journal entry",
+      "authRequired": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/entries",
+      "description": "Get user's journal entries",
+      "authRequired": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/mood",
+      "description": "Log a daily mood entry",
+      "authRequired": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/mood",
+      "description": "Get user's mood log entries",
+      "authRequired": true
+    },
+    {
+      "method": "POST",
+      "path": "/api/insights",
+      "description": "Generate AI insights for paid users",
+      "authRequired": true
+    },
+    {
+      "method": "GET",
+      "path": "/api/search",
+      "description": "Search through entries and tags",
+      "authRequired": true
+    }
+  ],
+  "openQuestions": [
+    "What type/scale should the mood field use in MoodLog?",
+    "How should tags be implemented for search functionality?",
+    "What specific AI insights should be generated?",
+    "How should the daily limits be tracked and enforced?",
+    "What payment tiers/pricing should be implemented with Stripe?"
+  ]
+}
